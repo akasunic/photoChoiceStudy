@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>
+            {% block title %}
+                Social Network
+            {% endblock %}
+        </title>
+        {% load staticfiles %}
+        <meta charset="utf-8">
+        <link rel="icon" href="{% static '/socialnetwork/favicon.ico' %}">
+        <link
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+            rel="stylesheet">
+        <link
+            href="{% static 'socialnetwork/base.css' %}"
+            rel="stylesheet"
+            type="text/css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        {% if js %}
+            <script src="{% static '/socialnetwork/socialnetwork.js' %}"></script>
+        {% endif %}
+
+
+    </head>
+
+    <body>
+    
+        <div class="header">
+            <div class="big-heading">
+                A Really Cool Social Network
+            </div>
+        </div>
+
+        {% if form %}
+            {% if form.errors %}
+                {% for error in forms.errors %}
+                    {{error}}
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+
+        {% if message %}
+            <div class="message">
+                {{message}}
+            </div>
+        {% endif %}
+
+        <div class="container-fluid">
+            {% block user-info %}{% endblock %}
+
+            <div class="content">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </body>
+</html>

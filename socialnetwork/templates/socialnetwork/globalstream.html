@@ -1,0 +1,63 @@
+{% extends "socialnetwork/base.html" %}
+
+{% block user-info %}
+
+    
+    <p>You are logged in as {{user.username}}</p>
+    <form action="{% url 'logout' %}" method="get">
+        {% csrf_token %}
+        <input type="submit" value="Logout">
+    </form>
+
+    <form action="{% url 'viewprofile' %}" method="get">
+        {% csrf_token %}
+        <input type="submit" value="My Profile">
+    </form>
+
+
+    <div class="post"><div class="directions">What do you want to share with people?</div>
+        {% for field in form %}
+            <p style="color: red">
+                {{ field.errors }}
+            </p>
+        {% endfor %}
+
+        <p id="post_len"></p>
+        <form method="POST" action="{% url 'writepost' sig %}">
+            {{form}}
+            {% csrf_token %}
+            <input type="submit" value="Share" />
+        </form>
+    </div>
+
+    <div class="sub-title"> The Global Stream</div>
+    <p id="error"></p>
+
+
+    <form method="POST" action="{% url 'followfeed' %}">
+        {% csrf_token %}
+        <input type="submit" value="Return to Your Feed" />
+    </form>
+    <table class="table" id="stream">
+        <tbody>
+        {% for msg in msgs %}
+            <tr>
+                <td class = "orig_msg" id = {{msg.id}}>
+                    {% if msg.user.person.photo%}
+                        <a href="{% url 'profile' msg.user.pk%}"> <img src="{% url 'streamphoto' msg.user.pk %}" alt="profile photo" width="50px"></a>
+                    {% else %}
+                    {% endif %}
+                    <br>
+                    {{msg.messageTime}}, <a href="{% url 'profile' msg.user.pk %}"> {{msg.user}} </a>: <br><div class="msg">{{msg.text}}</div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+
+
+
+
+

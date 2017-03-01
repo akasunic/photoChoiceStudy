@@ -1,0 +1,62 @@
+{% extends "socialnetwork/base.html" %}
+
+{% block user-info %}
+    <form action="{% url 'logout' %}" method="get">
+        {% csrf_token %}
+        <input type="submit" value="Logout">
+    </form>
+
+    <form action="{% url 'followfeed' %}" method="get">
+        {% csrf_token %}
+        <input type="submit" value="Return to Feed">
+    </form>
+{% endblock %}
+
+{% block content %} 
+    <div class="sub-title"> Profile page for {{user}} <br>Full name: {{user.person.firstname}} {{user.person.lastname}}</div>
+    {% if user.person.photo %}
+        <img src="{% url 'photo' id %}" alt="profile photo" width="200px">
+    {% else %}
+    {% endif %}
+    <table class="right">
+        <tr>
+            <td>
+                First name:
+            </td>
+            <td>
+                {{user.person.firstname}}
+            </td>
+        </tr>
+            <td>
+                Last name:
+            </td>
+            <td>
+                {{user.person.lastname}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Age:
+            </td>
+            <td>
+                {{user.person.age}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Bio:
+            </td>
+            <td>
+                {{user.person.bio}}
+            </td>
+        </tr>
+</table>
+    <!-- <table class="table">
+        {% for msg in msgs %}
+            <tr>
+                <td>At {{msg.messageTime}} {{user}} said:<br><div class="msg">{{msg.text}}</div></td>
+            <tr>
+        {% endfor %}
+    </table> -->
+{% endblock %}
+

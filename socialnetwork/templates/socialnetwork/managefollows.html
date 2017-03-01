@@ -1,0 +1,46 @@
+{% extends "socialnetwork/base.html" %}
+
+{% block user-info %}
+
+    {% for error in form.non_field_errors %}
+        <p style="color: red">
+            {{ error }}
+        </p>
+    {% endfor %}
+       
+    <p>You are logged in as {{user.username}}</p>
+    <form action="{% url 'logout' %}" method="get">
+        {% csrf_token %}
+        <input type="submit" value="Logout">
+    </form>
+
+  <form action="{% url 'followfeed' %}" method="get">
+        {% csrf_token %}
+        <input type="submit" value="Return to Feed">
+    </form>
+
+    <div class="directions">{{message_not}}</div>
+    <table class="table">
+        {% for not_follow in not_following %}
+            <tr>
+                <td>
+
+                    <a href="{% url 'follow' not_follow.user.id %}">Follow {{not_follow.user.username}}</a>
+                </td>
+            <tr>
+        {% endfor %}
+    </table>
+
+    <div class="directions">{{messagefollow}}</div>
+    <table class="table">
+    <table class="table">
+        {% for follow in following %}
+            <tr>
+                <td>
+                    <a href="{% url 'unfollow' follow.user.id %}">Unfollow {{follow.user.username}}</a>
+                </td>
+            <tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

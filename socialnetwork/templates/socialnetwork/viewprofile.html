@@ -1,0 +1,72 @@
+{% extends "socialnetwork/base.html" %}
+
+{% block user-info %}
+
+    <div class="directions">About You (username: {{user}})</div>
+    <form action="{% url 'logout' %}" method="get">
+        {% csrf_token %}
+        <input type="submit" value="Logout">
+    </form>
+
+    <form action="{% url 'followfeed' %}" method="get">
+        <input type="submit" value="Return to Feed">
+    </form>
+{% endblock %}
+
+{% block content %}
+
+    <table class="right">
+        {% if user.person.photo %}
+            <tr>
+                <img src="{%url 'myphoto' %}" alt="photo of user" width="200px">
+            <tr>
+        {% else %}
+        {% endif %}
+            <td>
+                First name:
+            </td>
+            <td>
+                {{user.person.firstname}}
+            </td>
+        </tr>
+            <td>
+                Last name:
+            </td>
+            <td>
+                {{user.person.lastname}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Age:
+            </td>
+            <td>
+                {{user.person.age}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Bio:
+            </td>
+            <td>
+                {{user.person.bio}}
+            </td>
+        </tr>
+    </table>
+
+    <form action="{% url 'editprofile' %}" method="get">
+        {% csrf_token %}
+        <input type="submit" value="Edit Profile">
+    </form>
+
+    <!-- <table class="table">
+        <tbody>
+            {% for msg in msgs %}
+                <tr>
+                    <td>At {{msg.messageTime}}:<br><div class="msg">{{msg.text}}</div></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table> -->
+     
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends "socialnetwork/base.html" %}
+
+{% block user-info %}
+    <p>You are logged in as
+        {{user.username}}</p>
+    <form action="{% url 'logout' %}" method="get">
+        <input type="submit" value="Logout">
+        {% csrf_token %}
+    </form>
+
+    <form action="{% url 'viewprofile' %}" method="get">
+        <input type="submit" value="My Profile">
+        {% csrf_token %}
+    </form>
+
+    <div class="post">
+        <div class="directions">What do you want to share with people?</div>
+        {% for field in form %}
+            <p style="color: red">
+                {{ field.errors }}
+             </p>
+        {% endfor %}
+
+
+        <p id="post_len"></p>
+        <form action="{% url 'writepost' sig %}" method="POST">
+            {{form}}
+            {% csrf_token %}
+            <input type="submit" value="Share"/>
+        </form>
+    </div>
+
+        {% if recentPost %}
+            <p>Your last share:
+
+                {{recentPost.text}}
+                on
+                {{recentPost.messageTime}}</p>
+            <p>(Suggestion: browse the global stream if you want to see all your posts!)
+        {% endif %}
+
+            <div class="sub-title">
+                Your Feed</div>
+            <p id="error"></p>
+            <p>{{message}}</p>
+
+
+            <form
+                action="{% url 'follows' %}"
+                method="GET"
+                style=" display:inline!important;">
+                {% csrf_token %}
+                <input type="submit" value="Manage Who You Follow"/>
+            </form>
+
+            <form
+                action="{% url 'globalstream' %}"
+                method="GET"
+                style=" display:inline!important;">
+                {% csrf_token %}
+                <input style="display: inline;" type="submit" value="Browse the Global Stream"/>
+            </form>
+            <table class="table" id="stream">
+                <tbody>
+                {% for msg in msgs %}
+                    <tr>
+                        <td class="orig_msg" id={{msg.id}}>
+                            {% if msg.user.person.photo %}
+                                <a href="{% url 'profile' msg.user.pk %}">
+                                    <img alt="profile photo" src="{% url 'streamphoto' msg.user.pk %}" width="50px"></a>
+                            {% else %}
+                            {% endif %}
+                            <br>
+                            {{msg.messageTime}},
+                            <a href="{% url 'profile' msg.user.pk %}">
+                                {{msg.user}}
+                            </a>:
+                            <br>
+                            <div class="msg">{{msg.text}}</div>
+                        </td>
+                    <tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "socialnetwork/base.html" %}
+
+{% block user-info %}
+<div class="user-info">
+    <h4>Don't have an account yet?</h4>
+    <form action="{% url 'register' %}" method="get">
+        {% csrf_token %}
+        <input class="reg" type="submit" value="Register">
+    </form>
+</div>
+
+{% endblock %}
+
+
+{% block content %}  
+    {% if form.errors %}
+        <p style="color:red">
+            Incorrect user name and password.
+        </p>
+    {% endif %}
+
+    <form method="post" action="{% url 'login' %}">
+        <table>
+            <tr>
+                <td>{{ form.username.label_tag }}</td>
+                <td>{{ form.username }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.password.label_tag }}</td>
+                <td>{{ form.password }}</td>
+            </tr>
+        </table>
+        {% csrf_token %}
+        <input type="submit" value="Login" />
+        <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+
+{% endblock %}
+

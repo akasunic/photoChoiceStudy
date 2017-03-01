@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Space+Mono');
+
+ul.errorlist{
+  list-style:none;
+  margin-left:0px;
+  padding-left:0px;
+  font-size:normal;
+}
+
+#error {
+  color:red;
+}
+
+.commentText {
+  height:40px;
+}
+
+ul.errorlist>li{
+  color:red;
+}
+
+table.right{
+  font-weight: bold;
+  font-size: large;
+  background-color:rgb(192, 230, 235);
+  opacity: 10%;
+}
+
+body {
+    
+    font-family: 'Open Sans', sans-serif;
+}
+
+.container-fluid{
+    padding-top:100px;
+}
+
+.header {
+    background-color: #77c9d4;
+    padding: 20px;
+    width:100%;
+    margin-bottom: 20px;
+    position: fixed;
+    top:0px;
+}
+
+.big-heading{
+    font-weight: bolder;
+    font-size: 25px;
+    background-color: #77c9d4;
+    color: white;
+    font-family: 'Space Mono', monospace;
+}
+
+input {
+    margin-bottom: 10px;
+    margin-top:10px;
+    margin-left: 10px;
+}
+
+input[type="submit"]{
+     background-color: #57BC90;
+     color:white;
+     border-radius: 12px;
+     margin-left:0px;
+     border:none;
+     padding:10px;
+}
+
+button {
+  background-color: #77c9d4;
+  border-radius: 8px;
+  border:none;
+  color:white;
+  margin:10px;
+}
+
+textarea{
+    width:100%;
+    height:70px;
+}
+
+input.reg {
+    background-color: #015249;
+}
+
+input[value="Logout"]{ 
+    position:fixed;
+    top: 20px;
+    right:20px;
+}
+
+input[value="My Profile"], input[value="Return to Feed"]{ 
+    position:fixed;
+    top: 20px;
+    right:100px;
+}
+
+.user-info{
+      float: right;
+      width:50%;
+      padding: 20px;
+      background-color: #a5a5af;
+      border-radius: 30px; 
+      text-align:center; 
+}
+
+.directions{
+    font-family: 'Space Mono', monospace;
+    font-size: 18px;
+    font-weight:bold;
+}
+
+.sub-title{
+    margin-top:20px;
+    background-color: #015249;
+    padding:10px;
+    width:100%;
+    font-family: 'Space Mono', monospace;
+    font-size: 20px;
+    border-radius: 15px;
+    color:white;
+
+}
+
+div.msg{
+    margin-left: 20px;
+    font-size: 20px;
+}

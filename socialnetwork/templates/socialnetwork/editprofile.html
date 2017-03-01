@@ -1,0 +1,33 @@
+{% extends "socialnetwork/base.html" %}
+
+{% block user-info %}
+    {% for field in form %}
+        <p style="color: red">
+            {{ field.errors }}
+        </p>
+    {% endfor %}
+
+
+    <div class="directons">You are logged in as
+        {{user.username}}</div>
+    <form action="{% url 'logout' %}" method="get">
+        <input type="submit" value="Logout">
+    </form>
+    <form action="{% url 'followfeed' %}" method="get">
+        <input type="submit" value="Return to Feed">
+    </form>
+    <form
+        action="{% url 'editprofile' %}"
+        enctype="multipart/form-data"
+        method="post">
+        <table>
+            {% for field in form %}
+                <tr>
+                    <td>{{field.label}}</td>
+                    <td>{{field}}</td>
+                {% endfor %}
+            </table>
+            {% csrf_token %}
+            <input class="reg" type="submit" value="Update"/>
+    </form>
+{% endblock %}

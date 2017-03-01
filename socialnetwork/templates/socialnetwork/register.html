@@ -1,0 +1,17 @@
+{% extends "socialnetwork/base.html" %}
+
+{% block content %}
+    <div class="directions">Be cool, join this network</div>
+    <form method="post" action="{% url 'register' %}">
+        <table>
+            {{form}}
+        </table>
+        {% csrf_token %}
+        <input class="reg" type="submit" value="Register" />
+    </form>
+    
+    <form method="post" action="{% url 'home' %}">
+        <input type="submit" value="Return to LogIn Page" />
+        {% csrf_token %}
+    </form>
+{% endblock %}
